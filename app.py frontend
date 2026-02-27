@@ -1,0 +1,81 @@
+import streamlit as st
+import pandas as pd
+import requests
+import matplotlib.pyplot as plt
+
+st.set_page_config(page_title="Ayushman Fraud Detection Agent", layout="wide")
+
+st.title("🛡️ Ayushman Bharat Fraud Detection Agent")
+st.markdown("AI-powered Healthcare Fraud Monitoring System")
+
+uploaded_file = st.file_uploader("Upload Claims CSV", type=["csv"])
+
+if uploaded_file:
+
+    df = pd.read_csv(uploaded_file, on_bad_lines="skip")
+
+    response = requests.post(
+        "http://127.0.0.1:5000/analyze",
+        json=df.to_dict(orient="records")
+    )
+
+    if response.status_code != 200:
+        st.error(response.json())
+        st.stop()
+
+    result = response.json()
+
+    analyzed_df = pd.DataFrame(result["analysis_data"])
+    llm_summary = result["llm_summary"]
+
+    st.success("Fraud Analysis Completed!")
+
+    # -------------------------------
+    # KPI SECTION
+    # -------------------------------
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Total Claims", len(analyzed_df))
+    col2.metric("ML Fraud Detected", int(analyzed_df["ml_fraud_prediction"].sum()))
+    col3.metric("High Risk Avg Score",
+                f"{analyzed_df['risk_score'].mean():.2f}%")
+
+    st.divider()
+
+    # -------------------------------
+    # Rule-Based Insights
+    # -------------------------------
+
+    st.subheader("Rule-Based Fraud Flags")
+
+    col4, col5 = st.columns(2)
+    col4.metric("Upcoding Cases", int(analyzed_df["upcoding_flag"].sum()))
+    col5.metric("Ghost Billing Cases", int(analyzed_df["ghost_billing_flag"].sum()))
+
+    # -------------------------------
+    # Chart
+    # -------------------------------
+
+    st.subheader("Fraud Distribution")
+
+    fig, ax = plt.subplots()
+    analyzed_df["ml_fraud_prediction"].value_counts().plot(kind="bar", ax=ax)
+    st.pyplot(fig)
+
+    # -------------------------------
+    # High Risk Table
+    # -------------------------------
+
+    st.subheader("Top High Risk Claims")
+    high_risk = analyzed_df.sort_values(by="risk_score", ascending=False)
+    st.dataframe(high_risk.head(15))
+
+    # -------------------------------
+    # LLM Summary
+    # -------------------------------
+
+    st.subheader("AI Audit Summary")
+    st.info(llm_summary)
+
+else:
+    st.info("Upload a claims dataset to begin analysis.")
