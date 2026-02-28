@@ -1,74 +1,171 @@
 # AYUSHMAN-INSIGHT
 Ayushman Bharat Fraud Detection Agent
-📌 Overview
-----------------
 
-Ayushman Insight is an intelligent fraud detection system designed to identify suspicious healthcare insurance claims under public health schemes. The platform leverages machine learning–based anomaly detection to detect abnormal billing patterns, inflated claims, unusual admission durations, and repetitive claim behavior.
 
-The system enhances transparency, reduces financial leakages, and enables proactive fraud monitoring for healthcare authorities.
+📌 Project Overview
+----------------------
+
+Ayushman Insight is an AI-powered healthcare fraud detection system designed to identify suspicious insurance claims under large-scale public health schemes. Healthcare fraud, including up-coding, inflated billing, ghost claims, and abnormal hospitalization patterns, results in significant financial losses and reduced system transparency. This project aims to address these challenges through intelligent analytics, anomaly detection, and automated risk reporting.
+
+The system leverages machine learning techniques to detect unusual claim behavior without requiring labeled fraud datasets. By combining anomaly detection, dynamic risk scoring, hospital-level risk ranking, and AI-generated executive summaries, Ayushman Insight provides a scalable and proactive fraud monitoring framework suitable for public healthcare systems.
+
+🎯 Problem Statement
+----------------------
+
+Healthcare insurance programs process thousands of claims daily. Manual auditing is time-consuming, resource-intensive, and often reactive rather than proactive. Fraudulent claims such as inflated billing, unnecessary procedures, repeated short admissions, and abnormal treatment costs are difficult to detect using traditional rule-based systems.
+
+There is a need for an intelligent, automated, and scalable fraud detection mechanism that can:
+1)Detect anomalous claims in real-time
+
+2)Prioritize high-risk cases
+
+3)Provide explainable insights
+
+4)Generate executive-level fraud reports
+
+5)Support data-driven auditing
+
+6)Ayushman Insight addresses these challenges using AI-driven analytics.
+
 
 🚀 Key Features
 --------------------
-*Anomaly Detection 
-*Dynamic Risk Scoring (0–100 scale)
-*Hospital Risk Ranking System
-*Real-time Fraud Analytics Dashboard
-*AI-Generated Executive Audit Reports
-*Risk Categorization (Low / Medium / High)
-*Scalable and Government-Ready Architecture
+🔍 1. AI-Based Anomaly Detection
+-----------------------------
 
-🧠 Technology Stack
---------------------
-*Python
-*Streamlit
-*Scikit-learn
-*Pandas
-*Plotly
-*OpenAI API (for AI-generated reports)
-*SQLite
+The system uses the Isolation Forest algorithm to detect outliers in healthcare claim data. It identifies abnormal patterns in:
+Claim amount
+1)Admission duration
 
-🏗 System Architecture
---------------------------
+2)Patient age trends
 
-Data Generation Layer
+3)Repeated claim behaviors
 
-Fraud Detection Engine (Isolation Forest)
+This allows fraud detection without pre-labeled datasets.
 
-Risk Scoring Module
+📊 2. Dynamic Risk Scoring (0–100 Scale)
+-------------------------------------------
+Each claim is assigned a dynamic risk score calculated based on:
 
-Dashboard & Analytics Layer
+1)Anomaly strength
 
-AI Risk Report Generator
+2)Claim amount deviation
+
+3)Admission duration deviation
+
+This enables auditors to prioritize high-risk claims efficiently.
+
+🏷 3. Risk Categorization
+----------------------------
+Claims are categorized into:
+
+1)Low Risk
+
+2)Medium Risk
+
+3)High Risk
+This simplifies interpretation and improves decision-making.
+
+🏥 4. Hospital Risk Ranking
+------------------------------
+The system aggregates risk scores at the hospital level and ranks institutions based on average risk patterns. This helps identify potentially fraudulent providers.
+
+📈 5. Real-Time Analytics Dashboard
+--------------------------------------
+Built using Streamlit, the dashboard provides:
+1)Fraud distribution visualization
+
+2)Risk level breakdown
+
+3)High-risk claims table
+
+4)Hospital ranking view
+
+🤖 6. AI-Generated Executive Fraud Report
+-------------------------------------------
+Using LLM integration, the system generates professional audit summaries highlighting:
+1)Total claims analyzed
+
+2)Fraud percentage
+
+3)High-risk hospitals
+
+4)Recommended actions
+This transforms raw analytics into actionable intelligence.
+
+🧠 System Architecture
+-----------------------------
+
+The system follows a modular layered architecture:
+
+1)Presentation Layer
+   -->Streamlit Web Application
+   
+   -->Interactive dashboard
+   
+2)Application Layer
+   -->Fraud detection engine
+   
+   -->Risk scoring module
+   
+   -->Risk categorization logic
+   
+   -->Hospital risk aggregation
+   
+3)Intelligence Layer
+   -->Isolation Forest anomaly detection
+   
+   -->Pattern-based fraud indicators
+   
+   -->AI report generation
+   
+4)Data Layer
+   -->Synthetic healthcare claim dataset
+   
+   -->SQLite (optional database integration
+
+⚙️ Technology Stack
+----------------------
+1)Python
+
+2)Streamlit
+
+3)Scikit-learn
+
+4)Pandas
+
+5)OpenAI API (LLM Reporting)
+
+6) ml model for anomaly detection
 
 📊 How It Works
--------------------------
+-----------------
+step -1: Synthetic healthcare claim data is generated.
 
-step 1: Synthetic healthcare claim data is generated.
-step 2: Isolation Forest detects anomalous claims.
-step 3: Each claim receives a Risk Score (0–100).
-step 4: Claims are categorized into risk levels.
-step 5:High-risk hospitals are ranked.
+step -2: The Isolation Forest model detects anomalous claims.
 
-🎯 Unique Selling Proposition
---------------------------------
+step-3: Risk scores are calculated for each claim.
 
-Ayushman Insight uniquely combines AI-powered anomaly detection, dynamic risk scoring, and automated executive-level fraud reporting into a single intelligent system for proactive and transparent healthcare fraud prevention.
+step 4: Claims are categorized by risk level.
 
-⚙ Installation
---------------------
-git clone https://github.com/your-username/ayushman-insight.git
-cd ayushman-insight
-pip install -r requirements.txt
-streamlit run app.py
-📌 Future Enhancements
+step 5: Hospitals are ranked based on aggregate risk.
 
-SHAP Explainability
+step 6: An AI-generated executive report is produced.
+
+🎯 Unique Selling Proposition (USP)
+--------------------------------------
+Ayushman Insight uniquely integrates anomaly detection, dynamic risk intelligence, hospital-level ranking, and automated executive fraud reporting into a single AI-driven system for proactive healthcare fraud prevention.
+
+🌍 Impact & Use Cases
 ------------------------
-Real-time Alert System
-PDF Report Download
-Role-based Login (Auditor/Admin)
-Deployment on Streamlit Cloud
+This solution can be applied to:
 
-👨‍💻 Developed By
+1)Government healthcare insurance schemes
 
-INSIGHT MINERS
+2)Public health auditing bodies
+
+3)Insurance fraud monitoring departments
+
+4)Healthcare regulatory agencies
+
+5)By enabling early detection of suspicious patterns, Ayushman Insight can significantly reduce financial leakage and enhance system transparency.
